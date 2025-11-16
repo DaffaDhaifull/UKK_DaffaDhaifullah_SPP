@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\SppController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -29,6 +30,12 @@ Route::middleware(['petugas'])->group(function () {
         Route::get('/admin/kelas/{id}', [KelasController::class,'show'])->name('kelas.show');
         Route::put('/admin/kelas/{id}',[KelasController::class,'update'])->name('kelas.update');
         Route::delete('/admin/kelas/{id}', [KelasController::class,'destroy'])->name('kelas.destroy');
+
+        Route::get('/admin/spp', [SppController::class,'index'])->name('spp.index');
+        Route::post('/admin/spp',[SppController::class,'store'])->name('spp.store');
+        Route::get('/admin/spp/{id}', [SppController::class,'show'])->name('spp.show');
+        Route::put('/admin/spp/{id}',[SppController::class,'update'])->name('spp.update');
+        Route::delete('/admin/spp/{id}', [SppController::class,'destroy'])->name('spp.destroy');
     });
 
     Route::middleware('role:petugas')->group(function () {

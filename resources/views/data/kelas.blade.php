@@ -50,7 +50,7 @@
                 @foreach ($kelas as $k)
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
-                        <td class="ps-4">{{ $k->nama_kelas }}</td>
+                        <td class="text-center">{{ $k->nama_kelas }}</td>
                         <td class="text-center">{{ $k->kompetensi_keahlian }}</td>
                         <td class="d-flex gap-2">
                             <button value="{{ $k->id_kelas }}" onclick="ubah(this.value)" data-bs-toggle="modal" data-bs-target="#editk" class="btn btn-warning btn-sm">Edit</button>
