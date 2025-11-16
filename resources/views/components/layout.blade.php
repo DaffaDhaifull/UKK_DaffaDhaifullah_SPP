@@ -59,13 +59,7 @@
                 color: #888;
             }
             .sidebar li:hover {
-                background-color: #E0F0FB;
-            }
-            .sidebar li:hover a {
-                color: #007acc !important;
-            }
-            .sidebar li:hover a i {
-                color: #007acc !important;
+                background-color: #F0F2F4;
             }
             .sidebar li.active {
                 background-color: #E0F0FB;
@@ -86,18 +80,20 @@
                 flex: 1;
                 margin-left: 250px;
                 min-height: 100vh;
+                background-color: #F5F5F9;
             }
             .main-content {
                 flex: 1;
                 overflow-y: auto;
-                padding: 20px;
+                padding: 10px;
+                background-color: #F5F5F9;
             }
             .navbar-brand {
                 color: #007acc !important;
                 font-weight: bold;
             }
             footer {
-                background-color: #ffffff;
+                background-color: #F5F5F9;
                 padding: 10px 0;
                 text-align: center;
             }
@@ -138,7 +134,7 @@
                     <div class="d-flex">
                         <span class="me-3 mt-1">Halo, {{$role}} ...</span>
                         <form action="/logout" method="post">@csrf
-                            <button type="submit" class="btn btn-outline-primary btn-sm"><i class="bi bi-door-open"></i> logout</button>
+                            <button type="submit" class="btn btn-outline-primary btn-sm"><i class="bi bi-escape"></i> logout</button>
                         </form>
                     </div>
                 </nav>
@@ -155,6 +151,10 @@
                 </footer>
             </div>
         </div>
+
+
+
         <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('api.js') }}"></script>
     </body>
 </html>
