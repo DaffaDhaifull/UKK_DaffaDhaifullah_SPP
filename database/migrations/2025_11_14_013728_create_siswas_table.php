@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('id_kelas');
             $table->text('alamat');
             $table->string('no_telepon',13);
+            $table->string('password');
             $table->integer('id_spp');
             $table->timestamps();
 
