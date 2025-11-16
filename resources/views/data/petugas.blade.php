@@ -51,7 +51,7 @@
                     </div>
                 </x-modal>
 
-                <x-modal modalId="deletep" buttonText="Edit" modalTitle="Hapus data petugas" actionForm="/admin/petugas/">
+                <x-modal modalId="deletep" buttonText="Edit" modalTitle="Hapus data petugas" actionForm="">
                     @method('DELETE')
                     <p>Anda yakin ingin menghapus data ini? tekan 'simpan' untuk menghapus data.</p>
                 </x-modal>
@@ -99,7 +99,7 @@
             user.value = data.username
             level.value = data.level
 
-            form.action = `/admin/update/${id}`
+            form.action = `/admin/petugas/${id}`
         }
 
         function hapus(id){
