@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SppController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,12 @@ Route::middleware(['petugas'])->group(function () {
         Route::get('/admin/spp/{id}', [SppController::class,'show'])->name('spp.show');
         Route::put('/admin/spp/{id}',[SppController::class,'update'])->name('spp.update');
         Route::delete('/admin/spp/{id}', [SppController::class,'destroy'])->name('spp.destroy');
+
+        Route::get('/admin/siswa', [SiswaController::class,'index'])->name('siswa.index');
+        Route::post('/admin/siswa',[SiswaController::class,'store'])->name('siswa.store');
+        Route::get('/admin/siswa/{id}', [SiswaController::class,'show'])->name('siswa.show');
+        Route::put('/admin/siswa/{id}',[SiswaController::class,'update'])->name('siswa.update');
+        Route::delete('/admin/siswa/{id}', [SiswaController::class,'destroy'])->name('siswa.destroy');
     });
 
     Route::middleware('role:petugas')->group(function () {

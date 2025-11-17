@@ -5,7 +5,7 @@
     <li class="{{ Request::is('*petugas') ? 'active' : ''}}"><a href="{{ route('petugas.index') }}"><i class="bi bi-person"></i>Petugas</a></li>
     <li class="{{ Request::is('*kelas') ? 'active' : ''}}"><a href="{{ route('kelas.index') }}"><i class="bi bi-door-open"></i>Kelas</a></li>
     <li class="{{ Request::is('*spp') ? 'active' : ''}}"><a href="{{ route('spp.index') }}"><i class="bi bi-cash-stack"></i>Spp</a></li>
-    <li class="{{ Request::is('*siswa') ? 'active' : ''}}"><a href=""><i class="bi bi-people"></i>Siswa</a></li>
+    <li class="{{ Request::is('*siswa') ? 'active' : ''}}"><a href="{{ route('siswa.index') }}"><i class="bi bi-people"></i>Siswa</a></li>
 
     <span class="section-title text-capitalize small text-muted mb-1 mt-2">Transaksi</span>
     <li><a href="#"><i class="bi bi-receipt-cutoff"></i>Pembayaran</a></li>
