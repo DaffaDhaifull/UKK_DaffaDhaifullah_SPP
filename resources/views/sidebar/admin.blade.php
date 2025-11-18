@@ -8,7 +8,7 @@
     <li class="{{ Request::is('*siswa') ? 'active' : ''}}"><a href="{{ route('siswa.index') }}"><i class="bi bi-people"></i>Siswa</a></li>
 
     <span class="section-title text-capitalize small text-muted mb-1 mt-2">Transaksi</span>
-    <li><a href="#"><i class="bi bi-receipt-cutoff"></i>Pembayaran</a></li>
+    <li class="{{ Request::is('*pembayaran*') ? 'active' : ''}}"><a href="{{ route('pembayaran.index') }}"><i class="bi bi-receipt-cutoff"></i>Pembayaran</a></li>
     <li><a href="#"><i class="bi bi-clock-history"></i>Riwayat</a></li>
     <li><a href="#"><i class="bi bi-printer"></i>Laporan</a></li>
 </ul>

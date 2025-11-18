@@ -54,6 +54,7 @@
                         <label class="form-label">Kelas Siswa</label>
                         <select class="form-select" name="idk">
                             @foreach ($kelas as $k)
+                                <option value="" hidden selected> - pilih kelas - </option>
                                 <option value="{{ $k->id_kelas }}">{{ $k->nama_kelas }}</option>
                             @endforeach
                         </select>
@@ -62,7 +63,8 @@
                         <label class="form-label">Nominal SPP</label>
                         <select class="form-select" name="ids">
                             @foreach ($spp as $s)
-                                <option value="{{ $s->id_spp }}">{{ $s->nominal }}</option>
+                                <option value="" hidden selected> - pilih spp - </option>
+                                <option value="{{ $s->id_spp }}">Rp. {{  number_format($s->nominal ?? 0, 0, ',', '.') }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -100,6 +102,7 @@
                         <label class="form-label">Kelas Siswa</label>
                         <select class="form-select" id="idk" name="idk">
                             @foreach ($kelas as $k)
+                                <option value="" hidden selected> - pilih kelas - </option>
                                 <option value="{{ $k->id_kelas }}">{{ $k->nama_kelas }}</option>
                             @endforeach
                         </select>
@@ -108,7 +111,8 @@
                         <label class="form-label">Nominal SPP</label>
                         <select class="form-select" id="ids" name="ids">
                             @foreach ($spp as $s)
-                                <option value="{{ $s->id_spp }}" >{{ $s->nominal }}</option>
+                                <option value="" hidden selected> - pilih spp - </option>
+                                <option value="{{ $s->id_spp }}" >Rp. {{  number_format($s->nominal ?? 0, 0, ',', '.') }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -154,7 +158,7 @@
                         <td class="ps-4">{{ $s->nama }}</td>
                         <td class="text-center">{{ $s->no_telepon }}</td>
                         <td class="text-center">{{ $s->kelas->nama_kelas }}</td>
-                        <td class="text-center">{{ $s->spp->nominal }}</td>
+                        <td class="text-center">Rp. {{ number_format($s->spp->nominal ?? 0, 0, ',', '.') }}</td>
                         <td class="d-flex gap-2">
                             <button value="{{ $s->nisn }}" onclick="ubah(this.value)" data-bs-toggle="modal" data-bs-target="#edits" class="btn btn-warning btn-sm">Edit</button>
                             <button value="{{ $s->nisn }}" onclick="hapus(this.value)" data-bs-toggle="modal" data-bs-target="#deletes" class="btn btn-danger btn-sm">Hapus</button>

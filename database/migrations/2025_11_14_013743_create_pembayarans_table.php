@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->foreign('id_petugas')->references('id_petugas')->on('petugas')->onDelete('cascade');
             $table->foreign('nisn')->references('nisn')->on('siswa')->onDelete('cascade');
-            $table->foreign('id_spp')->references('id_spp')->on('siswa')->onDelete('cascade');
+            $table->foreign('id_spp')->references('id_spp')->on('spp')->onDelete('cascade');
         });
     }
 

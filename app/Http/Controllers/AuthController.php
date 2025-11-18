@@ -20,9 +20,8 @@ class AuthController extends Controller
         ]);
 
         $petugas = Petugas::where('username', $request->username)->first();
-        $siswa = Siswa::where('no_telepon', $request->username)->first();
+        $siswa = Siswa::where('nis', $request->username)->first();
 
-        // === PETUGAS & ADMIN ===
         if ($petugas && Hash::check($request->password, $petugas->password)) {
             Auth::guard('petugas')->login($petugas);
             $request->session()->regenerate();
@@ -34,7 +33,6 @@ class AuthController extends Controller
             return redirect()->route('beranda.petugas');
         }
 
-        // === SISWA ===
         if ($siswa && Hash::check($request->password, $siswa->password)) {
             Auth::guard('siswa')->login($siswa);
             $request->session()->regenerate();

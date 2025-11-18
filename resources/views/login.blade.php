@@ -64,7 +64,7 @@
 
                     <div class="mb-3 text-start">
                         <label class="form-label fw-semibold">Username</label>
-                        <input type="text" class="form-control" name="username" placeholder="Masukkan username / no telepon" required>
+                        <input type="text" class="form-control" name="username" placeholder="Masukkan username / NIS" required>
                     </div>
 
                     <div class="mb-3 text-start">

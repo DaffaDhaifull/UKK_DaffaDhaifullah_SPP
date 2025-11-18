@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SppController;
@@ -20,29 +21,43 @@ Route::middleware(['petugas'])->group(function () {
     Route::middleware('role:admin')->group(function () {
         Route::get('/admin/beranda', [BerandaController::class, 'admin'])->name('beranda.admin');
 
-        Route::get('/admin/petugas', [PetugasController::class,'index'])->name('petugas.index');
-        Route::post('/admin/petugas',[PetugasController::class,'store'])->name('petugas.store');
-        Route::get('/admin/petugas/{id}', [PetugasController::class,'show'])->name('petugas.show');
-        Route::put('/admin/petugas/{id}',[PetugasController::class,'update'])->name('petugas.update');
-        Route::delete('/admin/petugas/{id}', [PetugasController::class,'destroy'])->name('petugas.destroy');
+        Route::prefix('admin/petugas')->name('petugas.')->group(function () {
+            Route::get('/', [PetugasController::class, 'index'])->name('index');
+            Route::post('/', [PetugasController::class, 'store'])->name('store');
+            Route::get('/{id}', [PetugasController::class, 'show'])->name('show');
+            Route::put('/{id}', [PetugasController::class, 'update'])->name('update');
+            Route::delete('/{id}', [PetugasController::class, 'destroy'])->name('destroy');
+        });
 
-        Route::get('/admin/kelas', [KelasController::class,'index'])->name('kelas.index');
-        Route::post('/admin/kelas',[KelasController::class,'store'])->name('kelas.store');
-        Route::get('/admin/kelas/{id}', [KelasController::class,'show'])->name('kelas.show');
-        Route::put('/admin/kelas/{id}',[KelasController::class,'update'])->name('kelas.update');
-        Route::delete('/admin/kelas/{id}', [KelasController::class,'destroy'])->name('kelas.destroy');
+        Route::prefix('admin/kelas')->name('kelas.')->group(function () {
+            Route::get('/', [KelasController::class, 'index'])->name('index');
+            Route::post('/', [KelasController::class, 'store'])->name('store');
+            Route::get('/{id}', [KelasController::class, 'show'])->name('show');
+            Route::put('/{id}', [KelasController::class, 'update'])->name('update');
+            Route::delete('/{id}', [KelasController::class, 'destroy'])->name('destroy');
+        });
 
-        Route::get('/admin/spp', [SppController::class,'index'])->name('spp.index');
-        Route::post('/admin/spp',[SppController::class,'store'])->name('spp.store');
-        Route::get('/admin/spp/{id}', [SppController::class,'show'])->name('spp.show');
-        Route::put('/admin/spp/{id}',[SppController::class,'update'])->name('spp.update');
-        Route::delete('/admin/spp/{id}', [SppController::class,'destroy'])->name('spp.destroy');
+        Route::prefix('admin/spp')->name('spp.')->group(function () {
+            Route::get('/', [SppController::class, 'index'])->name('index');
+            Route::post('/', [SppController::class, 'store'])->name('store');
+            Route::get('/{id}', [SppController::class, 'show'])->name('show');
+            Route::put('/{id}', [SppController::class, 'update'])->name('update');
+            Route::delete('/{id}', [SppController::class, 'destroy'])->name('destroy');
+        });
 
-        Route::get('/admin/siswa', [SiswaController::class,'index'])->name('siswa.index');
-        Route::post('/admin/siswa',[SiswaController::class,'store'])->name('siswa.store');
-        Route::get('/admin/siswa/{id}', [SiswaController::class,'show'])->name('siswa.show');
-        Route::put('/admin/siswa/{id}',[SiswaController::class,'update'])->name('siswa.update');
-        Route::delete('/admin/siswa/{id}', [SiswaController::class,'destroy'])->name('siswa.destroy');
+        Route::prefix('admin/siswa')->name('siswa.')->group(function () {
+            Route::get('/', [SiswaController::class, 'index'])->name('index');
+            Route::post('/', [SiswaController::class, 'store'])->name('store');
+            Route::get('/{id}', [SiswaController::class, 'show'])->name('show');
+            Route::put('/{id}', [SiswaController::class, 'update'])->name('update');
+            Route::delete('/{id}', [SiswaController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('admin/pembayaran')->name('pembayaran.')->group(function () {
+            Route::get('',[PembayaranController::class,'index'])->name('index');
+            Route::get('/{id}',[PembayaranController::class,'detailPembayaran'])->name('detail');
+            Route::post('/', [PembayaranController::class, 'storePembayaran'])->name('store');
+        });
     });
 
     Route::middleware('role:petugas')->group(function () {
