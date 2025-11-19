@@ -1,4 +1,37 @@
 <x-layout judul="DataPetugas">
+
+    @if (session('success'))
+        <div class="alert alert-success" role="alert" id="s_alert">
+            <strong>{{ session('success') }}</strong>
+        </div>
+
+        <script>
+            setTimeout(function() {
+                var alertElement = document.getElementById('s_alert');
+                alertElement.remove('show');
+            }, 3000);
+        </script>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger" role="alert" id="error_alert">
+            <strong>Oops! Ada kesalahan:</strong>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+
+        <script>
+            setTimeout(function() {
+                var alertElement = document.getElementById('error_alert');
+                alertElement.remove('show');
+            }, 5000);
+        </script>
+    @endif
+
+
     <div class="card">
         <div class="row p-4 flex-column flex-md-row pb-0">
             <div class="d-md-flex justify-content-between align-items-center col-md-auto me-auto mt-0">

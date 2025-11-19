@@ -7,7 +7,6 @@
         <link rel="icon" type="image/x-icon" href="assets/icons/cash.svg"/>
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/icons/bootstrap-icons.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/custom-select.css') }}">
 
         <title>{{$judul}}</title>
         <style>
@@ -157,6 +156,5 @@
 
         <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('api.js') }}"></script>
-        <script src="{{ asset('assets/js/custom-select.js') }}"></script>
     </body>
 </html>

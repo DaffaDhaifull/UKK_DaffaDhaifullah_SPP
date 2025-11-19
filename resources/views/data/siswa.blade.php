@@ -50,31 +50,35 @@
                         <label class="form-label">Nama Lengkap Siswa</label>
                         <input type="text" class="form-control" name="nama" placeholder="Masukan nama siswa">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Kelas Siswa</label>
-                        <select class="form-select" name="idk">
-                            @foreach ($kelas as $k)
-                                <option value="" hidden selected> - pilih kelas - </option>
-                                <option value="{{ $k->id_kelas }}">{{ $k->nama_kelas }}</option>
-                            @endforeach
-                        </select>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Kelas Siswa</label>
+                            <select class="form-select" name="idk">
+                                @foreach ($kelas as $k)
+                                    <option value="" hidden selected> - pilih kelas - </option>
+                                    <option value="{{ $k->id_kelas }}">{{ $k->nama_kelas }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Nominal SPP</label>
+                            <select class="form-select" name="ids">
+                                @foreach ($spp as $s)
+                                    <option value="" hidden selected> - pilih spp - </option>
+                                    <option value="{{ $s->id_spp }}">Rp. {{  number_format($s->nominal ?? 0, 0, ',', '.') }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Nominal SPP</label>
-                        <select class="form-select" name="ids">
-                            @foreach ($spp as $s)
-                                <option value="" hidden selected> - pilih spp - </option>
-                                <option value="{{ $s->id_spp }}">Rp. {{  number_format($s->nominal ?? 0, 0, ',', '.') }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Nomor Telepon</label>
-                        <input type="text" class="form-control" name="tlp" placeholder="Masukan nomor telepon">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" placeholder="Masukan passsword">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Nomor Telepon</label>
+                            <input type="text" class="form-control" name="tlp" placeholder="Masukan nomor telepon">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="Masukan passsword">
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Alamat Tinggal</label>

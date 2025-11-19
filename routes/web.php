@@ -58,6 +58,9 @@ Route::middleware(['petugas'])->group(function () {
             Route::get('/{id}',[PembayaranController::class,'detailPembayaran'])->name('detail');
             Route::post('/', [PembayaranController::class, 'storePembayaran'])->name('store');
         });
+
+        Route::get('/admin/riwayat',[PembayaranController::class,'riwayat'])->name('pembayaran.riwayat');
+        Route::get('/admin/riwayat/{id}',[PembayaranController::class,'detailRiwayat'])->name('riwayat.detail');
     });
 
     Route::middleware('role:petugas')->group(function () {
