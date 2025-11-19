@@ -93,29 +93,24 @@ class PembayaranController extends Controller
     }
 
 
-    public function riwayat(){
-        $pembayaran = Pembayaran::select(
-                DB::raw('MIN(id_pembayaran) as id_transaksi'),
-                'nisn',
-                'tgl_bayar',
-                DB::raw('MIN(created_at) as dicatat'),
-                DB::raw('COUNT(bulan_dibayar) as total_bulan'),
-                DB::raw('SUM(jumlah_bayar) as total_bayar')
-            )->groupBy('nisn', 'tgl_bayar')->orderBy('dicatat', 'desc')->get();
-
-        return view('data.riwayat_pembayaran', compact('pembayaran'));
-    }
-
-
-    public function detailRiwayat($id_pembayaran){
-        $utama = Pembayaran::with(['siswa', 'petugas'])
-            ->where('id_pembayaran', $id_pembayaran)->firstOrFail();
-
+    public function cetakKuitansi($id_pembayaran)
+    {
+        $utama = Pembayaran::with(['siswa.kelas', 'petugas'])->where('id_pembayaran', $id_pembayaran)->firstOrFail();
         $semuaPembayaran = Pembayaran::where('nisn', $utama->nisn)
             ->where('tgl_bayar', $utama->tgl_bayar)->get();
         $totalBayar = $semuaPembayaran->sum('jumlah_bayar');
 
-        return view('data.detail_riwayat', compact('utama','semuaPembayaran','totalBayar'));
+        $data = [
+            'utama' => $utama,
+            'semuaPembayaran' => $semuaPembayaran,
+            'totalBayar' => $totalBayar,
+            'tanggalCetak' => now()->format('l, d F Y'),
+        ];
+
+        $pdf = \PDF::loadView('pdf.kuitansi', $data)->setPaper('A5', 'portrait');
+
+        return $pdf->stream('kuitansi-'.$utama->nisn.'.pdf');
     }
+
 
 }
