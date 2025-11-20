@@ -56,6 +56,7 @@
                     <div class="mb-3">
                         <label class="form-label">Hak Akses</label>
                         <select class="form-select" name="level">
+                            <option value="" selected hidden> -- Pilih level -- </option>
                             <option value="admin">Admin</option>
                             <option value="petugas">Petugas</option>
                         </select>

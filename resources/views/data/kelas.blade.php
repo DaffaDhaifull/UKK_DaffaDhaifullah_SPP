@@ -44,7 +44,7 @@
                 <x-modal modalId="tambahkelas" useButton="ya" buttonText="Tambah kelas" modalTitle="Tambah data kelas" actionForm="{{ route('kelas.store') }}">
                     <div class="mb-3">
                         <label class="form-label">Nama Kelas</label>
-                        <input type="text" class="form-control" name="kls" placeholder="Masukan nama kelas">
+                        <input type="text" class="form-control" name="kelas" placeholder="Masukan nama kelas">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Kompetensi Keahlian</label>
@@ -63,7 +63,7 @@
                     @method('PUT')
                     <div class="mb-3">
                         <label class="form-label">Nama Kelas</label>
-                        <input type="text" class="form-control" id="kls" name="kls" placeholder="Masukan nama kelas">
+                        <input type="text" class="form-control" id="kls" name="kelas" placeholder="Masukan nama kelas">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Kompetensi Keahlian</label>

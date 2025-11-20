@@ -14,7 +14,7 @@ class SppController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'tahun' => 'required',
+            'tahun' => 'required|unique:spp,tahun',
             'nominal' => 'required|integer',
         ]);
         Spp::create([
@@ -32,7 +32,7 @@ class SppController extends Controller
 
     public function update(Request $request,string $id){
         $request->validate([
-            'tahun' => 'required',
+            'tahun' => 'required|unique:spp,tahun,'.$id.',id_spp',
             'nominal' => 'required|integer',
         ]);
         Spp::where('id_spp',$id)->update([

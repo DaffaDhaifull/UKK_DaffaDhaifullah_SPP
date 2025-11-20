@@ -14,7 +14,7 @@ class KelasController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'kls' => 'required',
+            'kelas' => 'required|unique:kelas,nama_kelas',
             'keahlian' => 'required',
         ]);
         Kelas::create([
@@ -32,7 +32,7 @@ class KelasController extends Controller
 
     public function update(Request $request, $id){
         $request->validate([
-            'kls' => 'required',
+            'kelas' => 'required|unique:kelas,nama_kelas,'.$id.',id_kelas',
             'keahlian' => 'required',
         ]);
         Kelas::where('id_kelas',$id)->update([

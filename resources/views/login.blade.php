@@ -60,6 +60,20 @@
                 <h4 class="mb-3" style="color:#007acc;">Selamat Datang</h4>
                 <p class="small-info mb-4">Silakan login untuk mengakses aplikasi.</p>
 
+                @if ($errors->any())
+                    <div class="alert alert-danger" id="gagal">
+                        {{ $errors->first() }}
+                    </div>
+
+                    <script>
+                        setTimeout(function() {
+                            var alertElement = document.getElementById('gagal');
+                            alertElement.remove('show');
+                        }, 3000);
+                    </script>
+                @endif
+
+
                 <form action="/login/proses" method="POST">@csrf
 
                     <div class="mb-3 text-start">
