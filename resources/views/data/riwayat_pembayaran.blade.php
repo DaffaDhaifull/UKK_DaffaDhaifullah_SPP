@@ -1,4 +1,4 @@
-<x-layout judul="DataPembayaran">
+<x-layout judul="CekSPP | Riwayat">
     <div class="card">
         <div class="row p-4 flex-column flex-md-row pb-0">
             <div class="d-md-flex justify-content-between align-items-center col-md-auto me-auto mt-0">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\RiwayatController;
@@ -63,6 +64,9 @@ Route::middleware(['petugas'])->group(function () {
         Route::get('/admin/riwayat',[RiwayatController::class,'riwayat'])->name('riwayat.index');
         Route::get('/admin/riwayat/{id}',[RiwayatController::class,'detailRiwayat'])->name('riwayat.detail');
         Route::post('/admin/cetak/{id}', [PembayaranController::class, 'cetakKuitansi'])->name('riwayat.cetak');
+
+        route::get('/admin/laporan',[LaporanController::class,'index'])->name('laporan.index');
+        Route::get('/laporan/cetak', [LaporanController::class, 'cetakPDF'])->name('laporan.cetak');
     });
 
     Route::middleware('role:petugas')->group(function () {

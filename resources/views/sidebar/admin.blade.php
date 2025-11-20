@@ -10,5 +10,6 @@
     <span class="section-title text-capitalize small text-muted mb-1 mt-2">Transaksi</span>
     <li class="{{ Request::is('*pembayaran*') ? 'active' : ''}}"><a href="{{ route('pembayaran.index') }}"><i class="bi bi-receipt-cutoff"></i>Pembayaran</a></li>
     <li class="{{ Request::is('*riwayat*') ? 'active' : ''}}"><a href="{{ route('riwayat.index') }}"><i class="bi bi-clock-history"></i>Riwayat</a></li>
-    <li><a href="#"><i class="bi bi-printer"></i>Laporan</a></li>
+    <li class="{{ Request::is('*laporan*') ? 'active' : ''}}"><a href="{{ route('laporan.index') }}"><i class="bi bi-printer"></i>Laporan</a></li>
+
 </ul>

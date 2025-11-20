@@ -17,6 +17,7 @@ class PembayaranController extends Controller
             $hasil[] = [
                 'nisn' => $s->nisn,
                 'nama' => $s->nama,
+                'kelas' => $s->kelas->nama_kelas,
                 'status' => $this->statusPembayaranSiswa($s->nisn)
             ];
         }

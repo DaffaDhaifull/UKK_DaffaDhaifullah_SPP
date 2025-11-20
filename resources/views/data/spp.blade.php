@@ -1,4 +1,6 @@
-<x-layout judul="DataSPP">
+<x-layout judul="CekSPP | SPP">
+    <h4 class="mb-1">Data SPP</h4>
+    <p>Menampilkan seluruh data spp yang ada di sekolah ini.</p>
 
     @if (session('success'))
         <div class="alert alert-success" role="alert" id="s_alert">
@@ -33,7 +35,7 @@
 
 
 
-    <div class="card">
+    <div class="card mt-4">
         <div class="row p-4 flex-column flex-md-row pb-0">
             <div class="d-md-flex justify-content-between align-items-center col-md-auto me-auto mt-0">
                 <input type="search" class="form-control" placeholder="Cari tahun ...">

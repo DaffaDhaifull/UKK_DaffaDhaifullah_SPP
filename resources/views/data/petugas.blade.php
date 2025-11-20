@@ -1,4 +1,6 @@
-<x-layout judul="DataPetugas">
+<x-layout judul="CekSPP | Petugas">
+    <h4 class="mb-1">Data Petugas</h4>
+    <p>Menampilkan data semua petugas yang terdaftar di aplikasi</p>
 
     @if (session('success'))
         <div class="alert alert-success" role="alert" id="s_alert">
@@ -32,7 +34,7 @@
     @endif
 
 
-    <div class="card">
+    <div class="card mt-4">
         <div class="row p-4 flex-column flex-md-row pb-0">
             <div class="d-md-flex justify-content-between align-items-center col-md-auto me-auto mt-0">
                 <input type="search" class="form-control" placeholder="Cari petugas ...">

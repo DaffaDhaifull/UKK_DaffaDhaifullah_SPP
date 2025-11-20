@@ -1,4 +1,4 @@
-<x-layout judul="Pembayaran | SPP">
+<x-layout judul="CekSPP | Pembayaran">
 
     <div class="card p-4">
         <h4>Pembayaran SPP</h4>

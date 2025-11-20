@@ -56,7 +56,6 @@ class SiswaController extends Controller
             'idk' => 'required',
             'alamat' => 'required',
             'tlp' => 'required|string|max:15|unique:siswa,no_telepon,'.$id.',nisn',
-            'password' => 'required|string|min:6',
             'ids' => 'required',
         ]);
 

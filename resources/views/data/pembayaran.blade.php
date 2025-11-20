@@ -1,4 +1,4 @@
-<x-layout judul="DataPembayaran">
+<x-layout judul="CekSPP | Pembayaran">
     <div class="card">
         <div class="row p-4 flex-column flex-md-row pb-0">
             <div class="d-md-flex justify-content-between align-items-center col-md-auto me-auto mt-0">
@@ -19,6 +19,7 @@
                 <tr>
                     <th>NISN</th>
                     <th>Nama Siswa</th>
+                    <th>Kelas</th>
                     @php
                         $bln = ["07","08","09","10","11","12","01","02","03","04","05","06"];
                     @endphp
@@ -33,6 +34,7 @@
                     <tr>
                         <td class="text-center">{{ $item['nisn'] }}</td>
                         <td>{{ $item['nama'] }}</td>
+                        <td class="text-center">{{ $item['kelas'] }}</td>
 
                         @foreach ($item['status'] as $bulan => $sts)
                             <td class="text-center">
