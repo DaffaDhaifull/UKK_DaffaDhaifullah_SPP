@@ -55,22 +55,38 @@ Route::middleware(['petugas'])->group(function () {
             Route::delete('/{id}', [SiswaController::class, 'destroy'])->name('destroy');
         });
 
-        Route::prefix('admin/pembayaran')->name('pembayaran.')->group(function () {
+        Route::prefix('admin/pembayaran')->name('admin.pembayaran.')->group(function () {
             Route::get('',[PembayaranController::class,'index'])->name('index');
             Route::get('/{id}',[PembayaranController::class,'detailPembayaran'])->name('detail');
             Route::post('/', [PembayaranController::class, 'storePembayaran'])->name('store');
         });
 
-        Route::get('/admin/riwayat',[RiwayatController::class,'riwayat'])->name('riwayat.index');
-        Route::get('/admin/riwayat/{id}',[RiwayatController::class,'detailRiwayat'])->name('riwayat.detail');
-        Route::post('/admin/cetak/{id}', [PembayaranController::class, 'cetakKuitansi'])->name('riwayat.cetak');
+        Route::prefix('admin/riwayat')->name('admin.riwayat.')->group(function () {
+            Route::get('',[RiwayatController::class,'riwayat'])->name('index');
+            Route::get('/{id}',[RiwayatController::class,'detailRiwayat'])->name('detail');
+            Route::post('/{id}', [PembayaranController::class, 'cetakKuitansi'])->name('cetak');
+        });
 
         route::get('/admin/laporan',[LaporanController::class,'index'])->name('laporan.index');
         Route::get('/laporan/cetak', [LaporanController::class, 'cetakPDF'])->name('laporan.cetak');
     });
 
+
+
     Route::middleware('role:petugas')->group(function () {
         Route::get('/petugas/beranda', [BerandaController::class, 'petugas'])->name('beranda.petugas');
+
+        Route::prefix('petugas/pembayaran')->name('petugas.pembayaran.')->group(function () {
+            Route::get('',[PembayaranController::class,'index'])->name('index');
+            Route::get('/{id}',[PembayaranController::class,'detailPembayaran'])->name('detail');
+            Route::post('/', [PembayaranController::class, 'storePembayaran'])->name('store');
+        });
+
+        Route::prefix('petugas/riwayat')->name('petugas.riwayat.')->group(function () {
+            Route::get('',[RiwayatController::class,'riwayat'])->name('index');
+            Route::get('/{id}',[RiwayatController::class,'detailRiwayat'])->name('detail');
+            Route::post('/{id}', [PembayaranController::class, 'cetakKuitansi'])->name('cetak');
+        });
     });
 });
 
@@ -78,4 +94,5 @@ Route::middleware(['petugas'])->group(function () {
 
 Route::middleware(['siswa'])->group(function () {
     Route::get('/siswa/beranda', [BerandaController::class, 'siswa'])->name('beranda.siswa');
+    Route::get('/siswa/riwayat', [RiwayatController::class, 'riwayatSiswa'])->name('riwayat.siswa');
 });

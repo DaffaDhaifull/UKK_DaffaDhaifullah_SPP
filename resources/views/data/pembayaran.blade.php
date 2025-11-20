@@ -1,8 +1,13 @@
 <x-layout judul="CekSPP | Pembayaran">
+@php
+    $prefix = request()->routeIs('admin.*') ? 'admin.' : 'petugas.';
+@endphp
+
     <div class="card">
         <div class="text-nowrap">
             <div class="dt-container dt-bootstrap5 dt-empty-footer">
-                <form action="{{ route('pembayaran.index') }}" method="get" class="row g-3 p-3">
+                {{-- <form action="{{ route('Xpembayaran.index') }}" method="get" class="row g-3 p-3"> --}}
+                <form action="{{ route($prefix.'pembayaran.index') }}" method="get" class="row g-3 p-3">
                     @csrf
                     <div class="col-md-4">
                         <label class="form-label text-capitalize">Cari siswa</label>
@@ -19,9 +24,9 @@
                     </div>
                     <div class="col-md-4 d-block align-items-end pt-4">
                         <button type="submit" class="btn btn-primary me-2 mt-2">Cari</button>
-                        <button type="button" onclick="this.form.reset(); window.location='{{ route('pembayaran.index') }}';" class="btn btn-outline-primary mt-2">
-                            Reset
-                        </button>
+                        {{-- <button type="button" onclick="this.form.reset(); window.location='{{ route('Xpembayaran.index') }}';" class="btn btn-outline-primary mt-2">Reset</button> --}}
+                        <button type="button" onclick="this.form.reset(); window.location='{{ route($prefix.'pembayaran.index') }}';" class="btn btn-outline-primary mt-2">Reset</button>
+
                     </div>
                 </form>
             </div>
@@ -59,7 +64,8 @@
                                 @endif
                             </td>
                         @endforeach
-                        <td class="text-center"><a href="/admin/pembayaran/{{ $item['nisn'] }}" class="btn btn-secondary btn-sm">Bayar</a></td>
+                        <td class="text-center"><a href="{{ route($prefix.'pembayaran.detail', $item['nisn'])}}" class="btn btn-secondary btn-sm">Bayar</a></td>
+                        {{-- <td class="text-center"><a href="/admin/pembayaran/{{ $item['nisn'] }}" class="btn btn-secondary btn-sm">Bayar</a></td> --}}
                     </tr>
                 @endforeach
             </tbody>

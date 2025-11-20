@@ -48,6 +48,16 @@ class RiwayatController extends Controller
         return view('data.riwayat_pembayaran', compact('pembayaran', 'kelas'));
     }
 
+    public function riwayatSiswa()
+    {
+        $nisn = auth()->guard('siswa')->user()->nisn;
+        $data = Pembayaran::where('nisn', $nisn)
+                        ->orderBy('tgl_bayar', 'desc')
+                        ->get();
+
+        return view('data.riwayat_siswa', compact('data'));
+    }
+
 
     public function detailRiwayat($id_pembayaran){
         $utama = Pembayaran::with(['siswa', 'petugas'])

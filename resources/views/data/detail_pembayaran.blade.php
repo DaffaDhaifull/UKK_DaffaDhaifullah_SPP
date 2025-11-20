@@ -1,10 +1,13 @@
 <x-layout judul="CekSPP | Pembayaran">
-
+@php
+    $prefix = request()->routeIs('admin.*') ? 'admin.' : 'petugas.';
+@endphp
     <div class="card p-4">
         <h4>Pembayaran SPP</h4>
         <p>Tambahkan pembayaran baru dengan pilih bulan yang ingin di bayar</p>
 
-        <form class="px-4 mx-4 mt-3" action="{{ route('pembayaran.store') }}" method="post">
+        {{-- <form class="px-4 mx-4 mt-3" action="{{ route('Xpembayaran.store') }}" method="post"> --}}
+        <form class="px-4 mx-4 mt-3" action="{{ route($prefix.'pembayaran.store') }}" method="post">
             @csrf
 
             <input type="hidden" name="nisn" value="{{ $siswa->nisn }}">
@@ -55,7 +58,9 @@
             </div>
 
             <div class="d-flex justify-content-end gap-2">
-                <a href="{{ route('pembayaran.index') }}" class="btn btn-outline-secondary">Batal</a>
+                <a href="{{ route($prefix.'pembayaran.index') }}" class="btn btn-outline-secondary">Batal</a>
+
+                {{-- <a href="{{ route('Xpembayaran.index') }}" class="btn btn-outline-secondary">Batal</a> --}}
                 <button type="submit" class="btn btn-primary px-4">Simpan</button>
             </div>
         </form>

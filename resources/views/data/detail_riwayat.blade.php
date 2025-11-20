@@ -1,4 +1,9 @@
 <x-layout judul="CekSPP | Riwayat">
+@php
+    $prefix = request()->routeIs('admin.*') ? 'admin.' : 'petugas.';
+@endphp
+
+
     <h4>Detail Pembayaran SPP</h4>
     <p>Melihat pembayaran yang telah di catat dan anda bisa mencetak kuitansi disini</p>
 
@@ -57,9 +62,12 @@
     </div>
 
     <div class="d-flex">
-        <a href="{{ Route('riwayat.index') }}" class="btn btn-outline-secondary mt-3 me-2">Selesai</a>
+        {{-- <a href="{{ Route('Xriwayat.index') }}" class="btn btn-outline-secondary mt-3 me-2">Selesai</a> --}}
+        <a href="{{ route($prefix.'riwayat.index') }}" class="btn btn-outline-secondary mt-3 me-2">Selesai</a>
 
-        <form action="{{ route('riwayat.cetak', $utama->id_pembayaran) }}" method="POST">
+
+        {{-- <form action="{{ route('Xriwayat.cetak', $utama->id_pembayaran) }}" method="POST"> --}}
+        <form action="{{ route($prefix.'riwayat.cetak', $utama->id_pembayaran) }}" method="POST">
             @csrf
             <button type="submit" class="btn btn-primary mt-3">Cetak kuitansi</button>
         </form>

@@ -1,8 +1,12 @@
-<x-layout judul="CekSPP | Riwayat">
+<x-layout judul="CekSPP | Riwayat">@php
+    $prefix = request()->routeIs('admin.*') ? 'admin.' : 'petugas.';
+@endphp
+
     <div class="card">
         <div class="text-nowrap">
             <div class="dt-container dt-bootstrap5 dt-empty-footer">
-                <form action="{{ route('riwayat.index') }}" method="get" class="row g-3 p-3">
+                {{-- <form action="{{ route('Xriwayat.index') }}" method="get" class="row g-3 p-3"> --}}
+                <form action="{{ route($prefix.'riwayat.index') }}" method="get" class="row g-3 p-3">
                     @csrf
                     <div class="col-md-3">
                         <label class="form-label text-capitalize">Cari siswa</label>
@@ -23,7 +27,9 @@
                     </div>
                     <div class="col-md-3 d-block align-items-end pt-4">
                         <button type="submit" class="btn btn-primary me-2 mt-2">Cari</button>
-                        <button type="button" onclick="this.form.reset(); window.location='{{ route('riwayat.index') }}';" class="btn btn-outline-primary mt-2">
+                        {{-- <button type="button" onclick="this.form.reset(); window.location='{{ route('Xriwayat.index') }}';" class="btn btn-outline-primary mt-2"> --}}
+                        <button type="button" onclick="this.form.reset(); window.location='{{ route($prefix.'riwayat.index') }}';" class="btn btn-outline-primary mt-2">
+
                             Reset
                         </button>
                     </div>
