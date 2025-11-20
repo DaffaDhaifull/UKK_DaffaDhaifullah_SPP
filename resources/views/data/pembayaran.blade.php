@@ -1,6 +1,6 @@
 <x-layout judul="CekSPP | Pembayaran">
     <div class="card">
-        <div class="card-datatable text-nowrap">
+        <div class="text-nowrap">
             <div class="dt-container dt-bootstrap5 dt-empty-footer">
                 <form action="{{ route('pembayaran.index') }}" method="get" class="row g-3 p-3">
                     @csrf

@@ -2,23 +2,50 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\Models\Pembayaran;
 use Illuminate\Support\Facades\DB;
 
 class RiwayatController extends Controller
 {
-    public function riwayat(){
-        $pembayaran = Pembayaran::select(
+    public function riwayat(Request $request)
+    {
+        $kelas = Kelas::all();
+        $cari = $request->cari;
+        $tgl  = $request->tgl;
+        $id_kelas = $request->kelas;
+
+        $query = Pembayaran::select(
                 DB::raw('MIN(id_pembayaran) as id_transaksi'),
                 'nisn',
                 'tgl_bayar',
                 DB::raw('MIN(created_at) as dicatat'),
                 DB::raw('COUNT(bulan_dibayar) as total_bulan'),
                 DB::raw('SUM(jumlah_bayar) as total_bayar')
-            )->groupBy('nisn', 'tgl_bayar')->orderBy('dicatat', 'desc')->get();
+            )
+            ->with('siswa.kelas')
+            ->groupBy('nisn', 'tgl_bayar')
+            ->orderBy('dicatat', 'desc');
 
-        return view('data.riwayat_pembayaran', compact('pembayaran'));
+        if ($cari) {
+            $query->whereHas('siswa', function ($q) use ($cari) {
+                $q->where('nama', 'like', '%' . $cari . '%')
+                ->orWhere('nisn', 'like', '%' . $cari . '%');
+            });
+        }
+
+        if ($tgl) {
+            $query->where('tgl_bayar', $tgl);
+        }
+
+        if ($id_kelas) {
+            $query->whereHas('siswa.kelas', function($q) use ($id_kelas){
+                $q->where('id_kelas', $id_kelas);
+            });
+        }
+        $pembayaran = $query->get();
+        return view('data.riwayat_pembayaran', compact('pembayaran', 'kelas'));
     }
 
 

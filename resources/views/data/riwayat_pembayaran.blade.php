@@ -1,10 +1,33 @@
 <x-layout judul="CekSPP | Riwayat">
     <div class="card">
-        <div class="row p-4 flex-column flex-md-row pb-0">
-            <div class="d-md-flex justify-content-between align-items-center col-md-auto me-auto mt-0">
-                <input type="search" class="form-control" placeholder="Cari siswa ...">
-            </div>
-            <div class="d-md-flex justify-content-between align-items-center col-md-auto ms-auto mt-0">
+        <div class="text-nowrap">
+            <div class="dt-container dt-bootstrap5 dt-empty-footer">
+                <form action="{{ route('riwayat.index') }}" method="get" class="row g-3 p-3">
+                    @csrf
+                    <div class="col-md-3">
+                        <label class="form-label text-capitalize">Cari siswa</label>
+                        <input class="form-control" type="text" name="cari" value="{{ request('cari') }}" placeholder="Masukan nama / nisn ...">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-capitalize">Pilih tanggal</label>
+                        <input class="form-control" type="date" name="tgl" value="{{ request('tgl') }}" placeholder="dd-MM-yyyy">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-capitalize">Pilih kelas</label><br>
+                        <select class="form-select" id="kelas_ab" name="kelas">
+                            <option value="" hidden selected>- Pilih kelas -</option>
+                            @foreach ($kelas as $k)
+                                <option value="{{ $k->id_kelas }}" {{ request('kelas') == $k->id_kelas ? 'selected' : '' }}>{{ $k->nama_kelas }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-3 d-block align-items-end pt-4">
+                        <button type="submit" class="btn btn-primary me-2 mt-2">Cari</button>
+                        <button type="button" onclick="this.form.reset(); window.location='{{ route('riwayat.index') }}';" class="btn btn-outline-primary mt-2">
+                            Reset
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
 
