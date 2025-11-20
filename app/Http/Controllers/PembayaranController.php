@@ -2,15 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\Models\Pembayaran;
 use App\Models\Siswa;
-use Illuminate\Support\Facades\DB;
 
 class PembayaranController extends Controller
 {
-    public function index(){
-        $siswa = Siswa::all();
+    public function index(Request $request)
+    {
+        $kelas = Kelas::all();
+        $cari = $request->cari;
+        $id_kelas = $request->kelas;
+        $query = Siswa::query()->with('kelas');
+
+        if ($cari) {
+            $query->where(function ($q) use ($cari) {
+                $q->where('nama', 'like', '%' . $cari . '%')
+                ->orWhere('nisn', 'like', '%' . $cari . '%');
+            });
+        }
+
+        if ($id_kelas) {
+            $query->where('id_kelas', $id_kelas);
+        }
+
+        $siswa = $query->get();
         $hasil = [];
 
         foreach ($siswa as $s) {
@@ -22,10 +39,9 @@ class PembayaranController extends Controller
             ];
         }
 
-        return view('data.pembayaran', [
-            'data' => $hasil
-        ]);
+        return view('data.pembayaran', ['data' => $hasil,'kelas' => $kelas]);
     }
+
 
 
     public function detailPembayaran(string $id){

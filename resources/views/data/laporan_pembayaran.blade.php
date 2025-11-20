@@ -20,7 +20,7 @@
                     Reset
                 </button>
                 <a href="{{ route('laporan.cetak', ['id_kelas' => request('id_kelas')]) }}"
-                    class="btn btn-danger mt-2" target="_blank">
+                    class="btn btn-danger mt-2">
                     Cetak PDF
                 </a>
             </div>
