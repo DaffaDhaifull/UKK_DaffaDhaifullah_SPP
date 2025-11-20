@@ -37,7 +37,7 @@
     <div class="card mt-4">
         <div class="row p-4 flex-column flex-md-row pb-0">
             <div class="d-md-flex justify-content-between align-items-center col-md-auto me-auto mt-0">
-                <input type="search" class="form-control" placeholder="Cari Siswa ...">
+                <input type="search" id="searchSiswa" class="form-control" placeholder="Cari Siswa ...">
             </div>
             <div class="d-md-flex justify-content-between align-items-center col-md-auto ms-auto mt-0">
                 <x-modal modalId="tambahsiswa" useButton="ya" buttonText="Tambah Siswa" modalTitle="Tambah data Siswa" actionForm="{{ route('siswa.store') }}">
@@ -157,7 +157,7 @@
                     <th style="width: 150px;">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tableSiswa">
                 @foreach ($siswa as $s)
                     <tr>
                         <td class="text-center">{{ $s->nisn }}</td>
@@ -178,6 +178,17 @@
     </div>
 
     <script>
+        document.getElementById('searchSiswa').addEventListener('keyup', function() {
+            let keyword = this.value.toLowerCase()
+            let rows = document.querySelectorAll('#tableSiswa tr')
+
+            rows.forEach(row => {
+                let text = row.innerText.toLowerCase();
+                row.style.display = text.includes(keyword) ? "" : "none";
+            })
+        });
+
+
         async function ubah(id){
             const data = await window.data.get(`/admin/siswa/${id}`)
             const form = document.getElementById("form-edits")

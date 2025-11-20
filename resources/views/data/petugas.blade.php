@@ -37,7 +37,7 @@
     <div class="card mt-4">
         <div class="row p-4 flex-column flex-md-row pb-0">
             <div class="d-md-flex justify-content-between align-items-center col-md-auto me-auto mt-0">
-                <input type="search" class="form-control" placeholder="Cari petugas ...">
+                <input type="search" id="searchPetugas" class="form-control" placeholder="Cari petugas ...">
             </div>
             <div class="d-md-flex justify-content-between align-items-center col-md-auto ms-auto mt-0">
                 <x-modal modalId="tambahpetugas" useButton="ya" buttonText="Tambah Petugas" modalTitle="Tambah data petugas" actionForm="{{ route('petugas.store') }}">
@@ -105,7 +105,7 @@
                     <th style="width: 150px;">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tabelPetugas">
                 @foreach ($petugas as $p)
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
@@ -124,6 +124,17 @@
     </div>
 
     <script>
+        document.getElementById('searchPetugas').addEventListener('keyup', function () {
+            let keyword = this.value.toLowerCase();
+            let rows = document.querySelectorAll('#tabelPetugas tr');
+
+            rows.forEach(row => {
+                let text = row.innerText.toLowerCase();
+                row.style.display = text.includes(keyword) ? "" : "none";
+            });
+        });
+
+
         async function ubah(id){
             const data = await window.data.get(`/admin/petugas/${id}`)
             const form = document.getElementById("form-editp")
