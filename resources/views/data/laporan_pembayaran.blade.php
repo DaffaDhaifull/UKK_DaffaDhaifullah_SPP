@@ -1,4 +1,20 @@
 <x-layout judul="CekSPP | Pembayaran">
+    <h4 class="mb-1">Laporan SPP</h4>
+    <p>Memncetak laporan berdasarkan kelas dan menampilkan total pembayaran</p>
+
+    @if (session('error'))
+        <div class="alert alert-danger" role="alert" id="d_alert">
+            <strong>{{ session('error') }}</strong>
+        </div>
+
+        <script>
+            setTimeout(function() {
+                var alertElement = document.getElementById('d_alert');
+                alertElement.remove('show');
+            }, 3000);
+        </script>
+    @endif
+
     <div class="card">
         <form class="row p-3" action="{{ route('laporan.index') }}" method="get">@csrf
             <div class="col-md-5">

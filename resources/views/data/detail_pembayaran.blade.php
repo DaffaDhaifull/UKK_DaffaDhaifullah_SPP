@@ -6,7 +6,6 @@
         <h4>Pembayaran SPP</h4>
         <p>Tambahkan pembayaran baru dengan pilih bulan yang ingin di bayar</p>
 
-        {{-- <form class="px-4 mx-4 mt-3" action="{{ route('Xpembayaran.store') }}" method="post"> --}}
         <form class="px-4 mx-4 mt-3" action="{{ route($prefix.'pembayaran.store') }}" method="post">
             @csrf
 
@@ -60,13 +59,17 @@
             <div class="d-flex justify-content-end gap-2">
                 <a href="{{ route($prefix.'pembayaran.index') }}" class="btn btn-outline-secondary">Batal</a>
 
-                {{-- <a href="{{ route('Xpembayaran.index') }}" class="btn btn-outline-secondary">Batal</a> --}}
-                <button type="submit" class="btn btn-primary px-4">Simpan</button>
+
+                <button type="submit" class="btn btn-primary px-4"  id="btnSimpan">Simpan</button>
             </div>
         </form>
     </div>
 
     <script>
+        const btn = document.getElementById("btnSimpan");
+        btn.onclick = () => confirm('Bulan: ' + [...document.querySelectorAll('.bulan-check:checked:not(:disabled)')].map(x=>x.value));
+
+
         document.querySelectorAll(".bulan-check").forEach(cb => {
 
             cb.addEventListener("change", function() {

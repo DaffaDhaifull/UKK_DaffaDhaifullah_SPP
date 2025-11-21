@@ -18,7 +18,7 @@ class KelasController extends Controller
             'keahlian' => 'required',
         ]);
         Kelas::create([
-            'nama_kelas' => $request->kls,
+            'nama_kelas' => $request->kelas,
             'kompetensi_keahlian' => $request->keahlian,
         ]);
 
@@ -36,7 +36,7 @@ class KelasController extends Controller
             'keahlian' => 'required',
         ]);
         Kelas::where('id_kelas',$id)->update([
-            'nama_kelas' => $request->kls,
+            'nama_kelas' => $request->kelas,
             'kompetensi_keahlian' => $request->keahlian,
         ]);
 

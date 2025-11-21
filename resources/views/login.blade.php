@@ -55,7 +55,8 @@
             <div class="login-card text-center">
 
                 <!-- Logo -->
-                <img src="" alt="Logo" class="logo">
+                {{-- <img src="" alt="Logo" class="logo"> --}}
+                {{-- <h3 class="fw-bold" style="color:#007acc;">CekSPP</h3> --}}
 
                 <h4 class="mb-3" style="color:#007acc;">Selamat Datang</h4>
                 <p class="small-info mb-4">Silakan login untuk mengakses aplikasi.</p>

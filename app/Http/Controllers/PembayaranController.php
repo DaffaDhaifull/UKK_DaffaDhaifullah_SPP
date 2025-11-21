@@ -89,7 +89,6 @@ class PembayaranController extends Controller
         $prefix = request()->routeIs('admin.*') ? 'admin.' : 'petugas.';
 
         return redirect()->route($prefix.'riwayat.detail', $idPertama)->with('success', 'Pembayaran berhasil ditambahkan.');
-        // return redirect()->route('Xriwayat.detail', $idPertama)->with('success', 'Pembayaran berhasil ditambahkan.');
     }
 
 

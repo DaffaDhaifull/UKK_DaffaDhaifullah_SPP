@@ -62,11 +62,8 @@
     </div>
 
     <div class="d-flex">
-        {{-- <a href="{{ Route('Xriwayat.index') }}" class="btn btn-outline-secondary mt-3 me-2">Selesai</a> --}}
         <a href="{{ route($prefix.'riwayat.index') }}" class="btn btn-outline-secondary mt-3 me-2">Selesai</a>
 
-
-        {{-- <form action="{{ route('Xriwayat.cetak', $utama->id_pembayaran) }}" method="POST"> --}}
         <form action="{{ route($prefix.'riwayat.cetak', $utama->id_pembayaran) }}" method="POST">
             @csrf
             <button type="submit" class="btn btn-primary mt-3">Cetak kuitansi</button>
