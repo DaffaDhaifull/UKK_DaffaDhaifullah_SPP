@@ -65,7 +65,7 @@
                             <tr>
                                 <th>Username</th>
                                 <th>Status</th>
-                                <th></th>
+                                <th>Waktu</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,7 +79,7 @@
                                             <span class="badge bg-secondary">logout</span>
                                         @endif
                                     </td>
-                                    <td><small>{{ $log->waktu_lalu }}</small></td>
+                                    <td><small>{{ \Carbon\Carbon::parse($log->waktu)->diffForHumans() }}</small></td>
                                 </tr>
                             @empty
                                 <tr>
@@ -116,7 +116,7 @@
                                     <td>{{ $log->siswa->nama }}</td>
                                     <td>{{ $log->bulan_dibayar }}</td>
                                     <td>Rp {{ number_format($log->jumlah_bayar, 0, ',', '.') }}</td>
-                                    <td>{{ $log->created_at }}</td>
+                                    <td><small>{{ \Carbon\Carbon::parse($log->created_at)->diffForHumans() }}</small></td>
                                 </tr>
                             @empty
                                 <tr>

@@ -19,8 +19,8 @@ class BerandaController extends Controller
         $totalPetugas = Petugas::count();
         $totalKelas = Kelas::count();
         $totalUangMasuk = Pembayaran::sum('jumlah_bayar');
-        $logPembayaran = Pembayaran::with(['petugas','siswa'])->latest()->take(10)->get();
-        $logLogin     = logLogin::orderBy('id_log','desc')->take(10)->get();
+        $logPembayaran = Pembayaran::with(['petugas','siswa'])->latest()->take(8)->get();
+        $logLogin     = logLogin::orderBy('id_log','desc')->take(5)->get();
 
         return view('beranda.admin',compact('totalSiswa','totalSPP','totalPetugas','totalKelas','totalUangMasuk','logPembayaran','logLogin'));
     }
@@ -30,14 +30,17 @@ class BerandaController extends Controller
         $totalPetugas = Petugas::count();
         $totalKelas = Kelas::count();
         $totalUangMasuk = Pembayaran::sum('jumlah_bayar');
-        $logPembayaran = Pembayaran::with(['petugas','siswa'])->latest()->take(10)->get();
-        $logLogin     = logLogin::orderBy('id_log','desc')->take(10)->get();
+        $logPembayaran = Pembayaran::with(['petugas','siswa'])->latest()->take(8)->get();
+        $logLogin     = logLogin::orderBy('id_log','desc')->take(8)->get();
 
         return view('beranda.petugas',compact('totalSiswa','totalSPP','totalPetugas','totalKelas','totalUangMasuk','logPembayaran','logLogin'));
     }
     public function siswa($id){
-        $data = Pembayaran::where('nisn',$id)->get();
+        $siswa = Siswa::find($id);
 
-        return view('beranda.siswa');
+        $bulanList = ['Juli', 'Agustus','September', 'Oktober', 'November', 'Desember','Januari', 'Februari', 'Maret', 'April','Mei', 'Juni'];
+        $pembayaran = Pembayaran::where('nisn', $siswa->nisn)->get()->keyBy('bulan_dibayar');
+
+        return view('beranda.siswa',compact('siswa','bulanList','pembayaran'));
     }
 }

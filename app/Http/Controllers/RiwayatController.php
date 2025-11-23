@@ -52,7 +52,7 @@ class RiwayatController extends Controller
     {
         $nisn = auth()->guard('siswa')->user()->nisn;
         $data = Pembayaran::where('nisn', $nisn)
-                        ->orderBy('tgl_bayar', 'desc')
+                        ->orderBy('created_at', 'desc')
                         ->get();
 
         return view('data.riwayat_siswa', compact('data'));
