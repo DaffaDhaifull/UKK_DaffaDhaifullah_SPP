@@ -64,14 +64,28 @@
                         <thead>
                             <tr>
                                 <th>Username</th>
-                                <th>Waktu</th>
                                 <th>Status</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td colspan="3" class="text-center">Tidak ada log login</td>
-                            </tr>
+                            @forelse($logLogin as $log)
+                                <tr>
+                                    <td>{{ $log->username }}</td>
+                                    <td>
+                                        @if ($log->aktivitas == 'login')
+                                            <span class="badge bg-success">login</span>
+                                        @else
+                                            <span class="badge bg-secondary">logout</span>
+                                        @endif
+                                    </td>
+                                    <td><small>{{ $log->waktu_lalu }}</small></td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="text-center">Tidak ada log login</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

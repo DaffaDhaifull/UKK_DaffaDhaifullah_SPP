@@ -129,6 +129,4 @@ class PembayaranController extends Controller
 
         return $pdf->stream('kuitansi-'.$utama->nisn.'.pdf');
     }
-
-
 }

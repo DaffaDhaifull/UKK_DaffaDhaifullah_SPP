@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('nama_petugas',35);
             $table->enum('level', ['admin','petugas'])->default('petugas');
+            $table->dateTime('last_login')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTime('last_logout')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
         });
     }

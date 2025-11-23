@@ -34,7 +34,7 @@ class RedirectIfAuthenticated
                 }
 
                 if ($guard === 'siswa') {
-                    return redirect()->route('beranda.siswa');
+                    return redirect()->route('beranda.siswa',Auth::guard('siswa')->user()->nisn);
                 }
             }
         }

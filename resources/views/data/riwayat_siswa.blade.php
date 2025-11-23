@@ -5,21 +5,23 @@
     @if ($data->isEmpty())
         <p class="text-muted">Belum ada riwayat pembayaran.</p>
     @else
-        <table class="table table-bordered">
-            <thead>
+        <table class="table mt-3">
+            <thead class="table-primary text-center">
                 <tr>
                     <th>Tanggal Bayar</th>
                     <th>Bulan Dibayar</th>
                     <th>Jumlah Bayar</th>
+                    <th>Waktu</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="text-center">
                 @foreach ($data as $r)
-                <tr>
-                    <td>{{ $r->tgl_bayar }}</td>
-                    <td>{{ $r->bulan_dibayar }}</td>
-                    <td>Rp {{ number_format($r->jumlah_bayar, 0, ',', '.') }}</td>
-                </tr>
+                    <tr>
+                        <td>{{ $r->tgl_bayar }}</td>
+                        <td>{{ $r->bulan_dibayar }}</td>
+                        <td>Rp {{ number_format($r->jumlah_bayar, 0, ',', '.') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($r->created_at)->diffForHumans() }}</td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>

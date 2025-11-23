@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('log_login', function (Blueprint $table) {
             $table->id('id_log');
-            $table->unsignedBigInteger('petugas_id')->nullable();
-            $table->string('username', 100)->nullable();
-            $table->string('ip_address', 50)->nullable();
-            $table->text('user_agent')->nullable();
-            $table->timestamp('waktu_login')->useCurrent();
-
-            $table->foreign('petugas_id')->references('id_petugas')->on('petugas')->nullOnDelete();
+            $table->string('user_id',30);
+            $table->string('username', 30);
+            $table->enum('role', ['admin','petugas', 'siswa']);
+            $table->enum('aktivitas', ['login', 'logout']);
+            $table->dateTime('waktu')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

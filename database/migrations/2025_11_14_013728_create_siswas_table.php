@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('no_telepon',13);
             $table->string('password');
             $table->integer('id_spp');
+            $table->dateTime('last_login')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTime('last_logout')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
 
             $table->foreign('id_kelas')->references('id_kelas')->on('kelas')->onDelete('cascade');

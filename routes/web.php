@@ -11,6 +11,9 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SppController;
 use Illuminate\Support\Facades\Route;
 
+Route::get("/", function () {
+    return redirect()->route('login');
+});
 
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::middleware(['guest:petugas', 'guest:siswa'])->group(function () {
@@ -93,6 +96,6 @@ Route::middleware(['petugas'])->group(function () {
 
 
 Route::middleware(['siswa'])->group(function () {
-    Route::get('/siswa/beranda', [BerandaController::class, 'siswa'])->name('beranda.siswa');
+    Route::get('/siswa/beranda/{id}', [BerandaController::class, 'siswa'])->name('beranda.siswa');
     Route::get('/siswa/riwayat', [RiwayatController::class, 'riwayatSiswa'])->name('riwayat.siswa');
 });

@@ -133,7 +133,7 @@
                     <span class="navbar-brand mb-0 h1"></span>
                     <div class="d-flex">
                         <span class="me-3 mt-1">Halo, {{$role}} ...</span>
-                        <form action="/logout" method="post">@csrf
+                        <form action="/logout" method="post" onsubmit="return confirm('Anda yakin ingin login?')">@csrf
                             <button type="submit" class="btn btn-outline-primary btn-sm"><i class="bi bi-escape"></i> logout</button>
                         </form>
                     </div>
@@ -147,7 +147,7 @@
                 </div>
 
                 <footer>
-                    <p>© 2025 - Web APlikasi CekSPP</p>
+                    <p>© 2025 - Web Aplikasi CekSPP</p>
                 </footer>
             </div>
         </div>
