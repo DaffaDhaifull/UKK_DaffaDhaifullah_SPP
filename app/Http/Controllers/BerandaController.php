@@ -8,6 +8,7 @@ use App\Models\Petugas;
 use App\Models\Siswa;
 use App\Models\Spp;
 use App\Models\LogLogin;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use function PHPUnit\Framework\returnArgument;
 
@@ -31,7 +32,8 @@ class BerandaController extends Controller
         $totalKelas = Kelas::count();
         $totalUangMasuk = Pembayaran::sum('jumlah_bayar');
         $logPembayaran = Pembayaran::with(['petugas','siswa'])->latest()->take(8)->get();
-        $logLogin     = logLogin::orderBy('id_log','desc')->take(8)->get();
+        // $logLogin     = logLogin::orderBy('id_log','desc')->take(8)->get();
+        $logLogin = DB::select('CALL show_log_login()');
 
         return view('beranda.petugas',compact('totalSiswa','totalSPP','totalPetugas','totalKelas','totalUangMasuk','logPembayaran','logLogin'));
     }
