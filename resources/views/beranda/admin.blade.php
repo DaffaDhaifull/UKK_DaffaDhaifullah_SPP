@@ -128,8 +128,27 @@
                 </div>
             </div>
         </div>
+        <canvas id="chartPembayaran7Hari" height="100"></canvas>
 
     </div>
 
 </div>
+
+<script src="{{ asset('assets/js/chart.umd.min.js') }}"></script>
+
+<script>
+const ctx = document.getElementById('chartPembayaran7Hari');
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {!! json_encode($labels) !!},    
+        datasets: [{
+            label: 'Total Pembayaran (Rp)',
+            data: {!! json_encode($totals) !!}
+        }]
+    }
+});
+</script>
+
 </x-layout>

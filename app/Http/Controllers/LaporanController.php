@@ -84,7 +84,7 @@ class LaporanController extends Controller
             'data' => $data,
             'kelas' => $kelas,
             'bulan' => ["Juli","Agstus","September","Oktober","November","Desember","Januari","Februari","Maret","April","Mei","Juni"]
-        ])->setPaper('A4', 'landscape'); // 🔥 Landscape
+        ])->setPaper('A4', 'landscape'); 
 
         return $pdf->stream('laporan_pembayaran_kelas.pdf');
     }

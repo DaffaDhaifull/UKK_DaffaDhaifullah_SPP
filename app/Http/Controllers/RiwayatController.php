@@ -48,6 +48,20 @@ class RiwayatController extends Controller
         return view('data.riwayat_pembayaran', compact('pembayaran', 'kelas'));
     }
 
+
+    public function detailRiwayat($id_pembayaran){
+        $utama = Pembayaran::with(['siswa', 'petugas'])
+            ->where('id_pembayaran', $id_pembayaran)->firstOrFail();
+
+        $semuaPembayaran = Pembayaran::where('nisn', $utama->nisn)
+            ->where('tgl_bayar', $utama->tgl_bayar)->get();
+
+        $totalBayar = $semuaPembayaran->sum('jumlah_bayar');
+
+        return view('data.detail_riwayat', compact('utama','semuaPembayaran','totalBayar'));
+    }
+
+    
     public function riwayatSiswa()
     {
         $nisn = auth()->guard('siswa')->user()->nisn;
@@ -59,14 +73,4 @@ class RiwayatController extends Controller
     }
 
 
-    public function detailRiwayat($id_pembayaran){
-        $utama = Pembayaran::with(['siswa', 'petugas'])
-            ->where('id_pembayaran', $id_pembayaran)->firstOrFail();
-
-        $semuaPembayaran = Pembayaran::where('nisn', $utama->nisn)
-            ->where('tgl_bayar', $utama->tgl_bayar)->get();
-        $totalBayar = $semuaPembayaran->sum('jumlah_bayar');
-
-        return view('data.detail_riwayat', compact('utama','semuaPembayaran','totalBayar'));
-    }
 }

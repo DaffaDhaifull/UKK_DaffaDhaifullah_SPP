@@ -31,15 +31,32 @@
                 </div>
                 <div class="col-md-6">
                     <label for="nama" class="for-label">Nominal SPP</label>
-                    <input type="text" class="form-control" value="Rp. {{ number_format($siswa->spp->nominal ?? 0, 0, ',', '.')  }}" disabled>
+                    <input type="text" class="form-control"
+                        value="Rp. {{ number_format($siswa->spp->nominal ?? 0, 0, ',', '.') }}" disabled>
                 </div>
             </div>
         </form>
     </div>
 
     <div class="card p-4 mt-4">
-        <h5>Data Pembayaran</h5>
-        <div class="px-4 mx-4 mt-3">
+        <div class="d-flex w-full justify-content-between align-items-center">
+            <h5>Data Pembayaran</h5>
+            <div class="w-12">
+                <form action="" method="GET">
+                    <select class="form-select" name="semester" id="semester"
+                        onchange="
+                        this.form.submit()
+                        ">
+                        <option value="" selected disabled hidden>Pilih semester</option>
+                        <option value="1" {{ request()->input('semester') == 1 ? 'selected' : '' }}>Semester 1
+                        </option>
+                        <option value="2" {{ request()->input('semester') == 2 ? 'selected' : '' }}>Semester 2
+                        </option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        <div class="px-4 mx-4 mt-4">
             <table class="table table-bordered">
                 <thead class="table-primary text-center">
                     <tr>

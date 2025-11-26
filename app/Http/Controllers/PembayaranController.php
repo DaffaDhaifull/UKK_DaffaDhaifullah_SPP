@@ -66,20 +66,20 @@ class PembayaranController extends Controller
                     ->where('bulan_dibayar', $bulan)
                     ->first();
 
+            if(!$cek){
+                $p = Pembayaran::create([
+                    'id_petugas'    => $request->petugas,
+                    'nisn'          => $nisn,
+                    'tgl_bayar'     => $request->tgl,
+                    'bulan_dibayar' => $bulan,
+                    'tahun_dibayar' => $request->tahun,
+                    'id_spp'        => $request->spp,
+                    'jumlah_bayar'  => $request->jumlah,
+                ]);
 
-            if ($cek) continue; // skip jika sudah ada
-            $p = Pembayaran::create([
-                'id_petugas'    => $request->petugas,
-                'nisn'          => $nisn,
-                'tgl_bayar'     => $request->tgl,
-                'bulan_dibayar' => $bulan,
-                'tahun_dibayar' => $request->tahun,
-                'id_spp'        => $request->spp,
-                'jumlah_bayar'  => $request->jumlah,
-            ]);
-
-            if (!$idPertama) {
-                $idPertama = $p->id_pembayaran;
+                if (!$idPertama) {
+                    $idPertama = $p->id_pembayaran;
+                }
             }
         }
 

@@ -2,6 +2,7 @@
 @php
     $prefix = request()->routeIs('admin.*') ? 'admin.' : 'petugas.';
 @endphp
+
     <div class="card p-4">
         <h4>Pembayaran SPP</h4>
         <p>Tambahkan pembayaran baru dengan pilih bulan yang ingin di bayar</p>
@@ -67,11 +68,11 @@
 
     <script>
         const btn = document.getElementById("btnSimpan");
-        btn.onclick = () => confirm('Bulan: ' + [...document.querySelectorAll('.bulan-check:checked:not(:disabled)')].map(x=>x.value));
+        btn.onclick = () => confirm('Bulan: ' + Array.from(document.querySelectorAll('.bulan-check:checked:not(:disabled)')).map(x=>x.value));
 
 
         document.querySelectorAll(".bulan-check").forEach(cb => {
-
+            
             cb.addEventListener("change", function() {
                 const label = document.getElementById("label-" + this.id);
 
