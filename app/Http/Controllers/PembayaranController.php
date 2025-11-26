@@ -6,6 +6,7 @@ use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\Models\Pembayaran;
 use App\Models\Siswa;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PembayaranController extends Controller
 {
@@ -125,7 +126,7 @@ class PembayaranController extends Controller
             'tanggalCetak' => now()->format('l, d F Y'),
         ];
 
-        $pdf = \PDF::loadView('pdf.kuitansi', $data)->setPaper('A5', 'portrait');
+        $pdf = Pdf::loadView('pdf.kuitansi', $data)->setPaper('A5', 'portrait');
 
         return $pdf->stream('kuitansi-'.$utama->nisn.'.pdf');
     }

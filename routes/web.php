@@ -71,6 +71,7 @@ Route::middleware(['petugas'])->group(function () {
         });
 
         route::get('/admin/laporan',[LaporanController::class,'index'])->name('laporan.index');
+        Route::get('/riwayat/pdf', [RiwayatController::class, 'cetakPDF'])->name('admin.riwayat.pdf');
         Route::get('/laporan/cetak', [LaporanController::class, 'cetakPDF'])->name('laporan.cetak');
     });
 

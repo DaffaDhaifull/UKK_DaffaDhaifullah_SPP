@@ -14,8 +14,12 @@
                         <input class="form-control" type="text" name="cari" value="{{ request('cari') }}" placeholder="Masukan nama / nisn ...">
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label text-capitalize">Pilih tanggal</label>
-                        <input class="form-control" type="date" name="tgl" value="{{ request('tgl') }}" placeholder="dd-MM-yyyy">
+                        <label class="form-label text-capitalize">Tanggal Awal</label>
+                        <input class="form-control" type="date" name="tgl-awal" value="{{ request('tgl-awal') }}" placeholder="dd-MM-yyyy">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-capitalize">Tanggal Akhir</label>
+                        <input class="form-control" type="date" name="tgl-akhir" value="{{ request('tgl-akhir') }}" placeholder="dd-MM-yyyy">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label text-capitalize">Pilih kelas</label><br>
@@ -26,11 +30,12 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-3 d-block align-items-end pt-4">
+                    <div class="col-md-3 d-block align-items-end">
                         <button type="submit" class="btn btn-primary me-2 mt-2">Cari</button>
-                        <button type="button" onclick="this.form.reset(); window.location='{{ route($prefix.'riwayat.index') }}';" class="btn btn-outline-primary mt-2">
+                        <button type="button" onclick="this.form.reset(); window.location='{{ route($prefix.'riwayat.index') }}';" class="btn btn-outline-primary me-2 mt-2">
                             Reset
                         </button>
+                        <button type="submit" class="btn btn-danger me-2 mt-2" formaction="{{ route('admin.riwayat.pdf') }}">Cetak PDF</button>
                     </div>
                 </form>
             </div>
