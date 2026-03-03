@@ -46,7 +46,7 @@
         </div>
 
         <!-- Total Uang Masuk -->
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card shadow-sm border-0 bg-success text-white">
                 <div class="card-body">
                     <h6>Total Uang Masuk</h6>
@@ -56,7 +56,30 @@
 
             <!-- TABLE LOG LOGIN -->
             <div class="card mt-4 shadow-sm border-0">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header">
+                    <strong>SPP lunas di bulan ini</strong>
+                </div>
+                <div class="card-body p-0">
+                    <canvas id="pieLunas" width=""></canvas>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-9">
+            <div class="card shadow-sm border-0">
+                <div class="card-header">
+                    <strong>Total Pembayaran (Rp)</strong>
+                </div>
+                <div class="card-body p-3">
+                    <canvas id="chartPembayaran7Hari" height="132"></canvas>
+                </div>
+            </div>
+        </div>
+
+        {{-- <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-header">
                     <strong>Log Login</strong>
                 </div>
                 <div class="card-body p-0">
@@ -92,13 +115,13 @@
             </div>
         </div>
 
-        <!-- TABLE LOG PEMBAYARAN -->
+
         <div class="col-md-8">
             <div class="card shadow-sm border-0">
-                <div class="card-header bg-warning">
+                <div class="card-header ">
                     <strong>Log Aktivitas Pembayaran</strong>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body p-4">
                     <table class="table mb-0">
                         <thead>
                             <tr>
@@ -127,8 +150,7 @@
                     </table>
                 </div>
             </div>
-        </div>
-        <canvas id="chartPembayaran7Hari" height="100"></canvas>
+        </div> --}}
 
     </div>
 
@@ -137,18 +159,35 @@
 <script src="{{ asset('assets/js/chart.umd.min.js') }}"></script>
 
 <script>
-const ctx = document.getElementById('chartPembayaran7Hari');
+    const ctx = document.getElementById('chartPembayaran7Hari');
 
-new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: {!! json_encode($labels) !!},    
-        datasets: [{
-            label: 'Total Pembayaran (Rp)',
-            data: {!! json_encode($totals) !!}
-        }]
-    }
-});
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {!! json_encode($labelsBulanan) !!},
+            datasets: [{
+                label: 'Total Uang Masuk per Bulan (Rp)',
+                data: {!! json_encode($totalsBulanan) !!},
+                backgroundColor: 'rgba(54, 162, 235, 0.6)'
+            }]
+        }
+    });
+
+    const ctxPie = document.getElementById('pieLunas');
+
+    new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+            labels: {!! json_encode($pieLabels) !!},
+            datasets: [{
+                data: {!! json_encode($pieValues) !!},
+                backgroundColor: [
+                    '#65C2A5', // hijau: sudah bayar
+                    '#C3C9EB'  // merah: belum bayar
+                ]
+            }]
+        }
+    });
 </script>
 
 </x-layout>

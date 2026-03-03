@@ -26,25 +26,60 @@ class BerandaController extends Controller
             ->latest()
             ->take(8)
             ->get();
-        $logLogin = logLogin::orderBy('id_log', 'desc')->take(5)->get();
+        $logLogin = logLogin::orderBy('id_log', 'desc')->take(8)->get();
 
-        $startDate = Carbon::now()->subDays(6)->toDateString(); // 7 hari termasuk hari ini
+        // $startDate = Carbon::now()->subDays(6)->toDateString(); // 7 hari termasuk hari ini
+        // $data = Pembayaran::select(DB::raw('DATE(tgl_bayar) as tanggal'), DB::raw('SUM(jumlah_bayar) as total_uang'))->where('tgl_bayar', '>=', $startDate)->groupBy('tanggal')->orderBy('tanggal', 'ASC')->get();
+        $dataBulanan = Pembayaran::select(
+            DB::raw('MONTH(tgl_bayar) as bulan'),
+            DB::raw('SUM(jumlah_bayar) as total')
+        )->whereYear('tgl_bayar', Carbon::now()->year)
+        ->groupBy('bulan')->orderBy('bulan')->get();
 
-        $data = Pembayaran::select(DB::raw('DATE(tgl_bayar) as tanggal'), DB::raw('SUM(jumlah_bayar) as total_uang'))->where('tgl_bayar', '>=', $startDate)->groupBy('tanggal')->orderBy('tanggal', 'ASC')->get();
+        $labelsBulanan = [
+            'Januari','Februari','Maret','April','Mei','Juni',
+            'Juli','Agustus','September','Oktober','November','Desember'
+        ];
 
-        // Siapkan array tanggal lengkap 7 hari (untuk mengisi data yang kosong)
-        $labels = collect();
-        for ($i = 6; $i >= 0; $i--) {
-            $labels->push(Carbon::now()->subDays($i)->toDateString());
-        }
-
-        // Mapping agar tanggal tanpa pembayaran → 0
-        $totals = $labels->map(function ($tgl) use ($data) {
-            $found = $data->firstWhere('tanggal', $tgl);
-            return $found ? $found->total_uang : 0;
+        $totalsBulanan = collect(range(1, 12))->map(function ($bln) use ($dataBulanan) {
+            $found = $dataBulanan->firstWhere('bulan', $bln);
+            return $found ? $found->total : 0;
         });
 
-        return view('beranda.admin', compact('labels', 'totals', 'totalSiswa', 'totalSPP', 'totalPetugas', 'totalKelas', 'totalUangMasuk', 'logPembayaran', 'logLogin'));
+        // Mapping nama bulan
+        $namaBulan = [
+            1 => 'Januari', 2 => 'Februari', 3 => 'Maret',
+            4 => 'April', 5 => 'Mei', 6 => 'Juni',
+            7 => 'Juli', 8 => 'Agustus', 9 => 'September',
+            10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+        ];
+
+        $bulanIni = $namaBulan[Carbon::now()->month];
+        $totalSiswa = Siswa::count();
+
+        $totalLunas = Pembayaran::where('bulan_dibayar', $bulanIni)
+            ->distinct('nisn')
+            ->count('nisn');
+
+        $totalBelum = $totalSiswa - $totalLunas;
+        $pieLabels = ['Sudah Bayar', 'Belum Bayar'];
+        $pieValues = [$totalLunas, $totalBelum];
+
+        return view('beranda.admin', [
+            'labelsBulanan' => $labelsBulanan,
+            'totalsBulanan' => $totalsBulanan,
+            'pieLabels' => $pieLabels,
+            'pieValues' => $pieValues,
+
+            // variabel lama
+            'totalSiswa' => $totalSiswa,
+            'totalSPP' => $totalSPP,
+            'totalPetugas' => $totalPetugas,
+            'totalKelas' => $totalKelas,
+            'totalUangMasuk' => $totalUangMasuk,
+            'logPembayaran' => $logPembayaran,
+            'logLogin' => $logLogin,
+        ]);
     }
     public function petugas()
     {

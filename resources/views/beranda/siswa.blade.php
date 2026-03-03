@@ -44,14 +44,10 @@
             <div class="w-12">
                 <form action="" method="GET">
                     <select class="form-select" name="semester" id="semester"
-                        onchange="
-                        this.form.submit()
-                        ">
+                        onchange="this.form.submit()">
                         <option value="" selected disabled hidden>Pilih semester</option>
-                        <option value="1" {{ request()->input('semester') == 1 ? 'selected' : '' }}>Semester 1
-                        </option>
-                        <option value="2" {{ request()->input('semester') == 2 ? 'selected' : '' }}>Semester 2
-                        </option>
+                        <option value="1" {{ request()->input('semester') == 1 ? 'selected' : '' }}>Semester 1 2025/2026</option>
+                        <option value="2" {{ request()->input('semester') == 2 ? 'selected' : '' }}>Semester 2 2025/2026</option>
                     </select>
                 </form>
             </div>
